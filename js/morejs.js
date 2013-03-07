@@ -59,7 +59,17 @@ var validateAddScoreForm = $("#addScoresForm").validate({
               minlength: 1,
               digits: true,
               scores_not_the_same: true
-          }
+          },
+        messages:{
+          validInputHomeTeamScore: {
+            min : "Score must be  '0' or larger.",
+            scores_not_the_same : "No Ties!"
+          },
+          validInputAwayTeamScore: {
+            min : "Score must be  '0' or larger.",
+            scores_not_the_same : "No Ties!"
+          },
+        } // end messages
     }, //end rules
 }); //end validateAddScoreForm
 
@@ -158,8 +168,12 @@ function getFromDatabase() {
       populateTeamList(data);
       displayButton(data.length);
 
-      // League Standings      
-      data.sort(sort_by('wpc', true, parseFloat));
+      // League Standings 
+      data.sort(sort_by('losses', false, parseFloat));
+      track("<i class='icon-random'></i> Teams sorted");
+      data.sort(sort_by('wpc', false, parseFloat));
+      track("<i class='icon-random'></i> Teams sorted");     
+      data.sort(sort_by('wins', true, parseFloat));
       track("<i class='icon-random'></i> Teams sorted");
       populateTeamTable(data);
     
@@ -200,6 +214,9 @@ function clearForm(){
     $('#signupForm').each (function(){  
         this.reset();
    }); 
+    $('#addScoresForm').each (function(){  
+    this.reset();
+   });
   };
 
   function startSeason() {
@@ -322,8 +339,7 @@ function populateGameSchedules(t) {
   
 function scoreOrTime (htn, hti, atn, ati, stamp, when, game, time) {
 
-//var sot = time + ":00 pm <button class='manage btn btn-mini' onclick=\"logScoreModal(\'" + htn +"\', \'"+ hti +"\', \'"+ atn +"\', \'"+ ati +"\', \'"+ stamp +"\', \'"+ when +"\', \'"+ game + "\')\">LogEm'</button>";
-var sot = time + ":00 pm <button class='manage btn btn-mini' onclick=\"logScoreModal(\'" + htn +"\', \'"+ hti +"\', \'"+ atn +"\', \'"+ ati +"\', \'"+ stamp +"\', \'"+ when +"\', \'"+ game + "\')\">LogEm'</button>";
+var sot = time + ":00 pm <button class='manage btn btn-mini' onclick=\"clearForm(), logScoreModal(\'" + htn +"\', \'"+ hti +"\', \'"+ atn +"\', \'"+ ati +"\', \'"+ stamp +"\', \'"+ when +"\', \'"+ game + "\')\">LogEm'</button>";
 
   $.ajax({ // Get outcome data then check for match
     url: 'backliftapp/outcomes',
