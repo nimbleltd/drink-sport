@@ -9,6 +9,11 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.validate.js"></script>
     <script src="js/morejs.js"></script>
+    <script type="text/javascript">jQuery.validator.setDefaults({
+      debug: true,
+      success: "valid"
+    });;
+    </script>
   </head>
   
   <body>
@@ -20,7 +25,7 @@
       <div class="row">
         <!--banner-->
         <div class="span2 pull-right text-right">
-          <a id="login">Secure login</a><br>
+          <a id="login">noLongerNeeded?</a><br>
           <a class="manage" onclick="resetSeason()">resetSeason()</a><br>
         </div>
         <div class="span8 offset2">
@@ -163,7 +168,7 @@
                 <h3>Final Score: <span id="stamp"></span>&nbspPlay</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="addScoresForm">
 
                   <input id="passStamp"  type="hidden" value="">
                   <input id="passWhen" type="hidden" value="">
@@ -174,19 +179,22 @@
                   <div class="control-group">
                     <label id="homeTeamLabel" class="control-label">Home Name</label>
                     <div class="controls">
-                      <input type="number" id="inputHomeTeamScore" class="input-mini">
+                      <!-- <input type="number" name="validInputHomeTeamScore" id="inputHomeTeamScore" class="input-mini"> -->
+                      <input name="validInputHomeTeamScore" id="inputHomeTeamScore" class="input-mini">
                     </div>
                   </div>
                   <div class="control-group">
                     <label id="awayTeamLabel" class="control-label">Away Name</label>
                     <div class="controls">
-                      <input type="number" id="inputAwayTeamScore" class="input-mini">
+                      <!-- <input type="number" name="validInputAwayTeamScore" id="inputAwayTeamScore" class="input-mini"> -->
+                      <input name="validInputAwayTeamScore" id="inputAwayTeamScore" class="input-mini">
                     </div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
-                <a data-dismiss="modal" aria-hidden="true" class="btn" onclick="logGameOutcome()">commit -m "scores"</a>
+                <!-- <a data-dismiss="modal" aria-hidden="true" class="btn" onclick="logGameOutcome()">commit -m "scores"</a> -->
+                <a data-dismiss="modal" aria-hidden="true" class="btn" id="addScoresButton" >Submit</a>
               </div>
             </div><!--End Add Scores Modal -->
 

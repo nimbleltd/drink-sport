@@ -36,14 +36,50 @@ var validator = $("#signupForm").validate({
     }, //end messages
 }); //end validate
 
+$.validator.addMethod("scores_not_the_same", function(value, element) {
+   return $('#inputHomeTeamScore').val() != $('#inputAwayTeamScore').val()
+}, "* Your Game must not end in a tie");
+
+var validateAddScoreForm = $("#addScoresForm").validate({
+       rules: {
+        validInputHomeTeamScore: {
+              required : true,
+              digits : true,
+              min : 0,
+              maxlength : 2,
+              minlength: 1,
+              digits: true,
+              scores_not_the_same: true
+          },
+        validInputAwayTeamScore: {
+              required : true,
+              digits : true,
+              min : 0,
+              maxlength : 2,
+              minlength: 1,
+              digits: true,
+              scores_not_the_same: true
+          }
+    }, //end rules
+}); //end validateAddScoreForm
+
+
+
 $("#addTeam").click(function(){
     if($('#signupForm').valid() == true){
   addTeam();
   $("#myModal").modal('hide');
-}
-return false;
+  }
+  return false;
+  }); //end addTeam click
 
-}); //end click
+$("#addScoresButton").click(function(){
+    if($('#addScoresForm').valid() == true){
+    logGameOutcome();
+    $("#scoreModal").modal('hide');
+    }
+    return false;
+    }); //end addScoresButton click
 
 $("#login").click(function() {
   track("<i class='icon-wrench'></i> You are now logged in");
@@ -106,9 +142,10 @@ function getFromDatabase() {
         data[i]['scheduleId'] = i + 1;
         // fix for NAN in win Percent Calculation
         if (data[i].wins === "0" && data[i].losses === "0") {
-          data[i]['wpc'] = "<span class='muted'>-NGP-</span>";
+          data[i]['wpc'] = parseFloat(0.000).toFixed(3).replace(/^0+/, '');
+          //data[i]['wpc'] = "<span class='muted'>-NGP-</span>";
         } else {
-          data[i]['wpc'] = (parseFloat(data[i].wins)/(parseFloat(data[i].wins)+parseFloat(data[i].losses))).toFixed(3);
+          data[i]['wpc'] = (parseFloat(data[i].wins)/(parseFloat(data[i].wins)+parseFloat(data[i].losses))).toFixed(3).replace(/^0+/, '');
         }
       }
 
@@ -285,6 +322,7 @@ function populateGameSchedules(t) {
   
 function scoreOrTime (htn, hti, atn, ati, stamp, when, game, time) {
 
+//var sot = time + ":00 pm <button class='manage btn btn-mini' onclick=\"logScoreModal(\'" + htn +"\', \'"+ hti +"\', \'"+ atn +"\', \'"+ ati +"\', \'"+ stamp +"\', \'"+ when +"\', \'"+ game + "\')\">LogEm'</button>";
 var sot = time + ":00 pm <button class='manage btn btn-mini' onclick=\"logScoreModal(\'" + htn +"\', \'"+ hti +"\', \'"+ atn +"\', \'"+ ati +"\', \'"+ stamp +"\', \'"+ when +"\', \'"+ game + "\')\">LogEm'</button>";
 
   $.ajax({ // Get outcome data then check for match
