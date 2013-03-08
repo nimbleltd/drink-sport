@@ -92,15 +92,13 @@ $("#addScoresButton").click(function(){
     logGameOutcome();
     $("#scoreModal").modal('hide');
     }
-    $("addScoresForm").validate().resetForm();
-
     return false;
     }); //end addScoresButton click
 
-$("#login").click(function() {
-  track("<i class='icon-wrench'></i> You are now logged in");
-  $(".manage").css("display", "inline");
-});
+// $("#login").click(function() {
+//   track("<i class='icon-wrench'></i> You are now logged in");
+//   $(".manage").css("display", "inline");
+// });
 
 function addTeam() {
   var team = {
@@ -137,7 +135,7 @@ function addTeam() {
 function getFromDatabase() {
     // code to make loading icon show
   $(document).ajaxSend(function(event, request, settings) {
-    $('#loading-indicator').show();
+    //$('#loading-indicator').show();
   });
 
   $('#teamList').empty();
@@ -175,11 +173,11 @@ function getFromDatabase() {
       displayButton(data.length);
 
       // League Standings 
-      data.sort(sort_by('losses', false, parseFloat));
+      data.sort(sort_by('wins', false, parseFloat));
       track("<i class='icon-random'></i> Teams sorted");
-      data.sort(sort_by('wpc', false, parseFloat));
+      data.sort(sort_by('losses', false, parseFloat));
       track("<i class='icon-random'></i> Teams sorted");     
-      data.sort(sort_by('wins', true, parseFloat));
+      data.sort(sort_by('wpc', true, parseFloat));
       track("<i class='icon-random'></i> Teams sorted");
       populateTeamTable(data);
     
@@ -191,7 +189,7 @@ function getFromDatabase() {
 
       // code to make loading icon hide
       $(document).ajaxComplete(function(event, request, settings) {
-          $('#loading-indicator').hide();
+          //$('#loading-indicator').hide();
       });
     }
   }); // end ajax
@@ -488,7 +486,7 @@ function increment(id, key, amt) {
 
 
 function resetSeason() {
-  var conf = confirm("Are you sure you want to clear all scores");
+  var conf = confirm("Are you sure you want to Delete all scores?");
   if (conf == true) {
     
     $.ajax({ // reset all win/loss numbers
@@ -509,7 +507,7 @@ function resetSeason() {
             for (i = 0; i < data.length; i++) { // clear each score record by record
               $.ajax({ url: "backliftapp/outcomes/"+data[i].id, type: "DELETE", dataType: "json", });
             } // end for loop
-            track("<i class='icon-fire'></i> Torched all the scores");
+            track("<i class='icon-fire'></i> Deleted all the scores");
 
             // Reset view of page and get new clean data from database
             $(".playing").css("display", "inline");

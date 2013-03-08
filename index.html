@@ -24,9 +24,9 @@
     <div class="container">
       <div class="row">
         <!--banner-->
-        <div class="span2 pull-right text-right">
-          <a id="login">noLongerNeeded?</a><br>
-          <a class="manage" onclick="resetSeason()">resetSeason()</a><br>
+        <div class="span2 offset10"> <!-- pull-right text-right -->
+<!--           <a id="login">noLongerNeeded?</a><br>
+ -->          <br><a type="submit" class="manage btn btn-danger" onclick="resetSeason()">Erase Scores</a>
         </div>
         <div class="span8 offset2">
            <h1>Booze and Sports League</h1>
@@ -180,14 +180,14 @@
                     <label id="homeTeamLabel" class="control-label">Home Name</label>
                     <div class="controls">
                       <!-- <input type="number" name="validInputHomeTeamScore" id="inputHomeTeamScore" class="input-mini"> -->
-                      <input name="validInputHomeTeamScore" id="inputHomeTeamScore" class="input-mini">
+                      <input type="number" name="validInputHomeTeamScore" id="inputHomeTeamScore" class="input-mini">
                     </div>
                   </div>
                   <div class="control-group">
                     <label id="awayTeamLabel" class="control-label">Away Name</label>
                     <div class="controls">
                       <!-- <input type="number" name="validInputAwayTeamScore" id="inputAwayTeamScore" class="input-mini"> -->
-                      <input name="validInputAwayTeamScore" id="inputAwayTeamScore" class="input-mini">
+                      <input type="number" name="validInputAwayTeamScore" id="inputAwayTeamScore" class="input-mini">
                     </div>
                   </div>
                 </form>
