@@ -27,7 +27,7 @@ var validator = $("#signupForm").validate({
         }, //end of rules
        messages: {
         mgrPhone : {
-          minlength : "Make sure you entered a 10-digit number."
+          minlength : "Make sure you enter a 10-digit<br> number with dashes.<br> 555-555-5555"
        },
         zip : {
           minlength : "Make sure you entered a 5 digit zipcode.",
@@ -130,7 +130,7 @@ function addTeam() {
     validator.resetForm();
   });
 
-}); // end ready
+}); // end document ready
 
 function getFromDatabase() {
     // code to make loading icon show
@@ -344,7 +344,7 @@ function populateGameSchedules(t) {
   
 function scoreOrTime (htn, hti, atn, ati, stamp, when, game, time) {
 
-var sot = time + ":00 pm <button class='manage btn btn-mini' onclick=\"clearForm(), logScoreModal(\'" + htn +"\', \'"+ hti +"\', \'"+ atn +"\', \'"+ ati +"\', \'"+ stamp +"\', \'"+ when +"\', \'"+ game + "\')\">LogEm'</button>";
+  var sot = time + ":00 pm <button class='manage btn btn-mini' onclick=\"clearForm(), logScoreModal(\'" + htn +"\', \'"+ hti +"\', \'"+ atn +"\', \'"+ ati +"\', \'"+ stamp +"\', \'"+ when +"\', \'"+ game + "\')\">LogEm'</button>";
 
   $.ajax({ // Get outcome data then check for match
     url: 'backliftapp/outcomes',
@@ -447,21 +447,23 @@ function logGameOutcome() {
       } else if (parseFloat(gameOutcome.homeTeamScore) < parseFloat(gameOutcome.awayTeamScore)) {
         increment(gameOutcome.homeTeamId, "losses", "1");
         increment(gameOutcome.awayTeamId, "wins", "1");
-      } else if (parseFloat(gameOutcome.homeTeamScore) === parseFloat(gameOutcome.awayTeamScore)) {
-        increment(gameOutcome.homeTeamId, "wins", ".5");
-        increment(gameOutcome.homeTeamId, "losses", ".5");
-        increment(gameOutcome.awayTeamId, "wins", ".5");
-        increment(gameOutcome.awayTeamId, "losses", ".5");   
-      }
+      } 
+      //Killed this part, no need to track ties, as there are none.
+      //   else if (parseFloat(gameOutcome.homeTeamScore) === parseFloat(gameOutcome.awayTeamScore)) {
+      //   increment(gameOutcome.homeTeamId, "wins", ".5");
+      //   increment(gameOutcome.homeTeamId, "losses", ".5");
+      //   increment(gameOutcome.awayTeamId, "wins", ".5");
+      //   increment(gameOutcome.awayTeamId, "losses", ".5");   
+      // }
 
       // Clear Imput Fields
       $("#inputHomeTeamScore").val("");
       $("#inputAwayTeamScore").val("");
 
       // wait a bit then refresh the page. Give a sec to allow the kids to finish.
-      window.setTimeout(function() {
-        getFromDatabase();
-      }, 250); // time in miliseconds
+      // window.setTimeout(function() {
+      //   getFromDatabase();
+      // }, 250); // time in miliseconds
 
     }
   }); // end ajax
