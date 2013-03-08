@@ -73,21 +73,27 @@ var validateAddScoreForm = $("#addScoresForm").validate({
     }, //end rules
 }); //end validateAddScoreForm
 
+//Clears validation errors from the add scores Form
+$('#scoreModal').on('hide', function () {
+  validateAddScoreForm.resetForm();
+});
 
 
 $("#addTeam").click(function(){
     if($('#signupForm').valid() == true){
-  addTeam();
-  $("#myModal").modal('hide');
-  }
-  return false;
-  }); //end addTeam click
+      addTeam();
+      $("#myModal").modal('hide');
+    }
+    return false;
+    }); //end addTeam click
 
 $("#addScoresButton").click(function(){
     if($('#addScoresForm').valid() == true){
     logGameOutcome();
     $("#scoreModal").modal('hide');
     }
+    $("addScoresForm").validate().resetForm();
+
     return false;
     }); //end addScoresButton click
 
@@ -216,6 +222,7 @@ function clearForm(){
    }); 
     $('#addScoresForm').each (function(){  
     this.reset();
+
    });
   };
 
