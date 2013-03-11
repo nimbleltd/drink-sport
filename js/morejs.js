@@ -173,9 +173,9 @@ function getFromDatabase() {
       displayButton(data.length);
 
       // League Standings 
-      data.sort(sort_by('wins', false, parseFloat));
-      track("<i class='icon-random'></i> Teams sorted");
       data.sort(sort_by('losses', false, parseFloat));
+      track("<i class='icon-random'></i> Teams sorted");
+      data.sort(sort_by('wins', false, parseFloat));
       track("<i class='icon-random'></i> Teams sorted");     
       data.sort(sort_by('wpc', true, parseFloat));
       track("<i class='icon-random'></i> Teams sorted");
@@ -366,12 +366,12 @@ function scoreOrTime (htn, hti, atn, ati, stamp, when, game, time) {
           var as = data[i].awayTeamScore;
 
           // if scores negative then make red
-          if (hs < 0) {
-            hs = "<span class='text-error'>("+ hs +")</span>"
-          }
-          if (as < 0) {
-            as = "<span class='text-error'>("+ as +")</span>"
-          }
+          // if (hs < 0) {
+          //   hs = "<span class='text-error'>("+ hs +")</span>"
+          // }
+          // if (as < 0) {
+          //   as = "<span class='text-error'>("+ as +")</span>"
+          // }
           sot = hs + " - " + as;
           } // end if find match
 
