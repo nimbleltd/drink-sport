@@ -30,8 +30,8 @@ Phases 1 and 2:
   The scores also appear in the schedule table in place of the scheduled game time. 
 
 ===============================================================
-Updates made by Paul Campbell
-
+Updates made by Paul Campbell / github user: nimbleltd
+==========
 - Get rid of login button
 - added validation to prevent negative scores and to prevent ties.
 - cleared the validation alerts
