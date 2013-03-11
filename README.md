@@ -28,3 +28,18 @@ Phases 1 and 2:
 - Adding scores calculates winning percentage for the teams and updates/sorts the league list with a table of 
   each team's wins and losses and winning percentage. The team with the highest winning percentage is listed first.
   The scores also appear in the schedule table in place of the scheduled game time. 
+
+===============================================================
+Updates made by Paul Campbell
+
+- Get rid of login button
+- added validation to prevent negative scores and to prevent ties.
+- cleared the validation alerts
+- Got rid of the "Ties" code.
+- Commented out turning negative scores to red.
+- Got rid of walrus and commented out intentional time delay.  
+
+Fixed sorting:
+- If no games played changed from NGP to .000
+- added sorts, to losses and wins, thanks to Cole and Andrew
+
